@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title text-center">Formulario de Producto</h5>
-            <form id="form-producto" method="POST" action="{{route('producto-actualizar', ['id'=>$producto->id])}}">
+            <form id="form-producto" method="POST" action="{{route('producto-actualizar', ['id'=>$producto->id])}}" enctype="multipart/form-data">
             @csrf
             <label for="nombreProducto" class="form-label mt-3">Nombre Producto</label>
             <input type="text" required class="form-control" placeholder="Ingrese el nombre del producto" id="nombreProducto" name="nombreProducto" value="{{$producto->nombreProducto}}">
@@ -57,8 +57,8 @@
                 @endforeach
             </select>
             
-            <label for="image_path" class="form-label mt-3">Imagen Producto</label>
-            <input type="file" required class="form-control" id="image_path" name="image_path" value="{{$producto->image_path}}">
+            <label for="image" class="form-label mt-3">Imagen Producto</label>
+            <input type="file" required class="form-control" id="image" name="image" value="{{$producto->image_path}}">
 
             <div class="form-check mt-3">
                 <input class="form-check-input" type="checkbox" value="{{$producto->activo}}" id="activo" name="activo" {{$producto->activo == 1 ? 'checked': ''}}>

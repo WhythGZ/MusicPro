@@ -16,7 +16,7 @@
                             <div class="card" style="margin-bottom: 20px; height: auto;">
                                       @if ($pro->image_path)
                                         <img class="card-img-top mx-auto"
-                                        style="height: 250px; width: 150px;display: block;" src="{{ asset('images/'. $pro->image_path)}}" alt="Imagen del Producto">
+                                        style="height: 250px; width: 250px;display: block;" src="{{ $pro->image_path}}" alt="Imagen del Producto">
                                     @endif
                                 <div class="card-body">
                                     <a href=""><h6 class="card-title">{{ $pro->nombreProducto }}</h6></a>

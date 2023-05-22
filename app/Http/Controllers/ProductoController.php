@@ -56,6 +56,13 @@ class ProductoController extends Controller
         $producto->marcaProducto = $request->marcaProducto;
         $producto->categoriaProducto = $request->categoriaProducto;
         $producto->subCategoria = $request->subCategoria;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('public/images');
+            $producto->image_path = 'storage/images/' . $image->hashName();
+        }else{
+            $producto->image_path = '';
+        }31
         if($request->activo == 1){
             $producto->activo = $request->activo;
         }else{

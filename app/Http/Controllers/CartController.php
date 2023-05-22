@@ -22,7 +22,7 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success_msg', 'Producto Removido!');
     }
 
-    public function add(Request$request){
+    public function add(Request $request){
         \Cart::add(array(
             'id' => $request->id,
             'name' => $request->name,
