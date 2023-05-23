@@ -6,6 +6,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SubCategoriaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +54,27 @@ Route::post('/add', [CartController::class, 'add'])->name('cart.store');
 Route::post('/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+Route::resource('users', UserController::class)->names('admin.users');
+
+Auth::routes();
+
+// Rutas protegidas por autenticación
+Route::middleware(['auth'])->group(function () {
+    // Ruta de inicio después del inicio de sesión
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    // Rutas para la gestión de usuarios
+    Route::prefix('users')->group(function () {
+        // Lista de usuarios
+        Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+        // Crear usuario
+        Route::get('/create', [App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+        Route::post('/', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+        // Editar usuario
+        Route::get('/{user}/edit', [App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+        Route::put('/{user}', [App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+        // Eliminar usuario
+        Route::delete('/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+    });
+});
